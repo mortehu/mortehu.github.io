@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<title>Rank</title>
+<script src=https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js></script>
+<script src=https://ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js></script>
+<style>li{cursor:pointer}</style>
+<p>You can drag-n-drop choices if you like.
+<ul id=choices name=choices>
+<li><input name=i0 disabled=disabled type=text value=1521 class=choice> Your score will not affect your payment in any way.</li>
+<li><input name=i1 disabled=disabled type=text value=2029 class=choice> As a bonus, you will be paid an extra 1 cent for every 100 points that you score.</li>
+<li><input name=i2 disabled=disabled type=text value=2175 class=choice> As a bonus you will be paid an extra 10 cents for every 100 points that you score.</li>
+<li><input name=i3 type=text class=choice> As a bonus, you will be paid an extra 4 cents for every 100 points that you score.</li>
+<li><input name=i4 type=text class=choice> As a bonus, you will be paid an extra 1 cent for every 1000 points that you score.</li>
+<li><input name=i5 type=text class=choice> As a bonus, the Red Cross charitable fund will be given 1 cent for every 100 points that you score.</li>
+<li><input name=i6 type=text class=choice> As a bonus, the Red Cross charitable fund will be given 10 cents for every 100 points that you score.</li>
+<li><input name=i7 type=text class=choice> In appreciation to you for performing this task you will be paid a bonus of 40 cents. Your score will not affect your payment in any way.</li>
+<li><input name=i8 type=text class=choice> As a bonus, you will be paid an extra 1 cent for every 100 points that you score. This bonus will be paid to your account two weeks from today.</li>
+<li><input name=i9 type=text class=choice> As a bonus, you will be paid an extra 1 cent for every 100 points that you score. This bonus will be paid to your acount four weeks from today.</li>
+<li><input name=i10 type=text class=choice> As a bonus, you will be paid an extra 40 cents if you score at least 2,000 points.</li>
+<li><input name=i11 type=text class=choice> As a bonus, you will be paid an extra 40 cents. However, you will lose this bonus (it will not be placed in your account) unless you score at least 2,000 points.</li>
+<li><input name=i12 type=text class=choice> As a bonus, you will be paid an extra 80 cents if you score at least 2,000 points.</li>
+<li><input name=i13 type=text class=choice> As a bonus, you will have a 1% chance of being paid an extra $1 for every 100 points that you score. One out of every 100 participants who perform this task will be randomly chosen to be paid this reward.</li>
+<li><input name=i14 type=text class=choice> As a bonus, you will have a 50% chance of being paid an extra 2 cents for every 100 points that you score. One out of every 100 participants who perform this task will be randomly chosen to be paid this reward.</li>
+<li><input name=i15 type=text class=choice> Your score will not affect your payment in any way. In a previous version of this task, many participants were able to score more than 2,000 points.</li>
+<li><input name=i16 type=text class=choice> Your score will not affect your payment in any way. After you play, we will show you how well you did relative to other participants who have previously done this task.</li>
+<li><input name=i17 type=text class=choice> Your score will not affect your payment in any way. We are interested in how fast people choose to press digits and we would like you to do your very best. So please try as hard as you can.</li>
+</ul>
+<input id=show type=button value='Show score'>
+<script>
+  var correct = [1521, 2029, 2175, 2132, 1883, 1907, 1918, 1602, 2004, 1970, 2136, 2155, 2188, 1896, 1977, 1848, 1761, 1740];
+
+  Sortable.create('choices', {});
+  document.getElementById('show').onclick = function() {
+    document.getElementById('score').style.display = 'inline';
+                var scores = document.getElementsByClassName('choice');
+                var choices = [];
+
+                var sum_error = 0;
+
+                for (var i = 0; i < scores.length; ++i)
+                {
+                  var idx = parseInt(scores[i].getAttribute('name').substr(1));
+                  sum_error += correct[idx] - parseInt(scores[idx].value || 0);
+                }
+
+
+                document.getElementById('score').innerHTML = sum_error / correct.length;
+              };
+</script>
+<p>MAD: <span id=score style=display:none></span></p>
