@@ -28,22 +28,22 @@
 <script>
   var correct = [1521, 2029, 2175, 2132, 1883, 1907, 1918, 1602, 2004, 1970, 2136, 2155, 2188, 1896, 1977, 1848, 1761, 1740];
 
+  // Make items draggable.
   Sortable.create('choices', {});
+
   document.getElementById('show').onclick = function() {
-    document.getElementById('score').style.display = 'inline';
-                var scores = document.getElementsByClassName('choice');
-                var choices = [];
+    var scores = document.getElementsByClassName('choice');
+    var choices = [];
 
-                var sum_error = 0;
+    var sum_error = 0;
 
-                for (var i = 0; i < scores.length; ++i)
-                {
-                  var idx = parseInt(scores[i].getAttribute('name').substr(1));
-                  sum_error += Math.abs(correct[idx] - parseInt(scores[idx].value || 0));
-                }
+    for (var i = 0; i < scores.length; ++i) {
+      var idx = parseInt(scores[i].getAttribute('name').substr(1));
+      sum_error += Math.abs(correct[idx] - parseInt(scores[idx].value || 0));
+    }
 
 
-                document.getElementById('score').innerHTML = sum_error / (correct.length - 3);
-              };
+    document.getElementById('score').innerHTML = sum_error / (correct.length - 3);
+  };
 </script>
-<p>MAD: <span id=score style=display:none></span></p>
+<p>MAD: <span id=score></span></p>
