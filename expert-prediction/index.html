@@ -39,7 +39,7 @@
                 for (var i = 0; i < scores.length; ++i)
                 {
                   var idx = parseInt(scores[i].getAttribute('name').substr(1));
-                  sum_error += correct[idx] - parseInt(scores[idx].value || 0);
+                  sum_error += Math.abs(correct[idx] - parseInt(scores[idx].value || 0));
                 }
 
 
