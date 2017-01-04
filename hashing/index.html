@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<title>Integer hashing</title>
+<style>
+  pre {
+    margin-left: 40px; border-left: 4px solid #ccc; padding-left: 40px;
+  }
+</style>
+<h1>Integer Hashing</h1>
+<p>These functions were discovered using exhaustive searches for <a href=https://en.wikipedia.org/wiki/Perfect_hash_function>injective functions</a>, looking for the program that minimizes the evaluation metric for a given program length.
+<h2>Evaluation Metric</h2>
+<p>The function <code>C(f, a, b)</code> gives the correlation between changes
+to output bit <code>a</code> and output bit <code>b</code> for single bit
+changes to the input.  input bit <code>i</code> will result in a change to
+output bit <code>o</code>.  The function <code>A(f)</code> is given by
+<code>A(f) = E(C(f, i, o) - 0.5)</code>.
+
+<p>The function <code>D(f, i)</code> gives the average fraction of output bits
+that are changed when input but <code>i</code> is changed.  The function
+<code>B(f)</code> is given by <code>B(f) = \frac{1}{i} \sum_i D(f, i)</code>.
+
+<p>The evaluation metric is given by <code>E(f) = A(f) + B(f)</code>.  The equal weighting is somewhat arbitrary.
+<p>In plain English, the goals of the evaluation metric are:
+<ul>
+  <li>ensuring each input bit affects on average half of the output bits, and
+  <li>ensuring changes to output bits are not correlated for any given input bit,.
+</ul>
+<h2>Allowed Operations</h2>
+<p>The allowed operations are: <code>ADD</code>, <code>SUBTRACT</code>, <code>MULTIPLY</code>, <code>NOT</code>, <code>AND</code>, <code>OR</code>, <code>XOR</code>, <code>SHIFT-RIGHT</code>, and <code>SHIFT-LEFT</code>.
+<h2>8-bit functions</h2>
+<p>The functions are ordered from worst to best.
+<h3>Single Instruction</h3>
+<pre>inline uint8_t hash1(const uint8_t i)
+{
+   return i * 0xab;
+}</pre>
+<h3>Two Instructions</h3>
+<p>No function exists that improves the evaluation metric relative to the single instruction function.
+<h3>Three Instructions</h3>
+<pre>inline uint8_t hash3(const uint8_t i)
+{
+   const uint8_t a = i * 13;
+   return (a &gt;&gt; 3) ^ a;
+}</pre>
